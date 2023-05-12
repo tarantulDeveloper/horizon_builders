@@ -10,4 +10,5 @@ public interface BuildingService {
     void deleteBuildingById(int id);
 
     Building findBuildingById(int id);
+
 }

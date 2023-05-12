@@ -25,7 +25,7 @@ public class GlobalTypeController {
     }
 
     @GetMapping
-    public List<GlobalTypeResponse> fetchAllGlobalTypes() {
+    public List<GlobalType> fetchAllGlobalTypes() {
         return globalTypeService.fetchAllGlobalTypes();
     }
 }

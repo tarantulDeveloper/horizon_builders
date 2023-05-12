@@ -1,14 +1,12 @@
 package com.horizonbuilders.server.controller;
 
+import com.horizonbuilders.server.dto.response.UserInfoResponse;
 import com.horizonbuilders.server.dto.response.UserResponse;
 import com.horizonbuilders.server.service.impl.UserServiceImpl;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,5 +20,10 @@ public class UserController {
                                 @RequestParam("username") String username,
                                 @RequestParam("password") String password) {
         return userService.addNewUser(positionId, username, password);
+    }
+
+    @GetMapping("/{userId}")
+    public UserInfoResponse getById(@PathVariable("userId") int id){
+        return userService.findUserById(id);
     }
 }
