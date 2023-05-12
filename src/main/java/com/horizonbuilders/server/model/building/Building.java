@@ -7,6 +7,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
@@ -22,7 +25,7 @@ public class Building extends DefaultModel {
     String imgUrl;
     @Enumerated(EnumType.STRING)
     EState state;
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    @JoinColumn(name = "users_id")
-    User employee;
+    @OneToMany()
+    @JoinColumn(name = "building_id",referencedColumnName = "id")
+    List<User> employeeList = new ArrayList<>();
 }
