@@ -12,14 +12,13 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/position")
+@RequestMapping("/position")
 @RequiredArgsConstructor
 public class PositionController {
     @Autowired
     private final PositionService positionService;
 
     @PostMapping
-//    @PreAuthorize("hasRole('ADMIN')")
     public Position addPosition(
             @NotNull @NotBlank @RequestParam("name") String name,
             @RequestParam("salary") double salary) throws IOException {
