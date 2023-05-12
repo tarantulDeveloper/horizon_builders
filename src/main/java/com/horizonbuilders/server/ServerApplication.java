@@ -11,7 +11,7 @@ public class ServerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ServerApplication.class, args);
-        log.info("id of process: " + new ApplicationPid().toString());
+        log.info("id of process: " + new ApplicationPid());
     }
 
 }

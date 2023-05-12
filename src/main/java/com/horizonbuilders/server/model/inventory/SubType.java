@@ -3,7 +3,6 @@ package com.horizonbuilders.server.model.inventory;
 import com.horizonbuilders.server.model.DefaultModel;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Getter;

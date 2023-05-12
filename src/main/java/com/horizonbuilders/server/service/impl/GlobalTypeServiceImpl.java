@@ -19,7 +19,7 @@ public class GlobalTypeServiceImpl implements GlobalTypeService {
 
     @Override
     public void createGlobalType(String name) {
-        if(globalTypeRepository.existsByName(name)) {
+        if (globalTypeRepository.existsByName(name)) {
             throw new BadRequestException("Global type already exists!");
         }
         GlobalType globalType = new GlobalType();

@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@FieldDefaults(level =  AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @RequestMapping("/global-type")
 public class GlobalTypeController {
     final GlobalTypeService globalTypeService;
