@@ -28,8 +28,10 @@ public class User extends DefaultModel implements UserDetails {
     String photoUrl;
     String phoneNumber;
     String address;
-    boolean active;
     boolean enabled;
+    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @JoinColumn(name = "position_id")
+    Position position;
     @ElementCollection(targetClass = ERole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
@@ -57,7 +59,7 @@ public class User extends DefaultModel implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return active;
+        return true;
     }
 }
 
