@@ -1,6 +1,5 @@
-package com.horizonbuilders.server.model.inventory;
+package com.horizonbuilders.server.model;
 
-import com.horizonbuilders.server.model.DefaultModel;
 import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -12,9 +11,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Product extends DefaultModel {
+public class Position extends DefaultModel{
     String name;
-    int quantity;
-    String imgUrl;
-    double price;
+    double salary;
 }

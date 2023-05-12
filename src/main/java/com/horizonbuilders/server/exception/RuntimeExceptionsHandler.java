@@ -8,9 +8,9 @@ import org.springframework.web.context.request.WebRequest;
 
 @RestControllerAdvice
 public class RuntimeExceptionsHandler {
-    @ExceptionHandler(BadRequestException.class)
+    @ExceptionHandler({BadRequestException.class,AlreadyExistException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse badRequestHandling(BadRequestException exception, WebRequest request) {
+    public ErrorResponse badRequestHandling(RuntimeException exception, WebRequest request) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setStatusCode(HttpStatus.BAD_REQUEST.value());
         errorResponse.setMessage(exception.getMessage());
@@ -39,4 +39,5 @@ public class RuntimeExceptionsHandler {
         errorResponse.setDescription(request.getDescription(false));
         return errorResponse;
     }
+
 }
