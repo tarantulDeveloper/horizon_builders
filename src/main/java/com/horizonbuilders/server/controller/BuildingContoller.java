@@ -2,17 +2,18 @@ package com.horizonbuilders.server.controller;
 
 import com.horizonbuilders.server.model.building.Building;
 import com.horizonbuilders.server.service.impl.BuildingServiceImpl;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/building")
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@RequestMapping("/building")
 public class BuildingContoller {
-    @Autowired
     BuildingServiceImpl buildingService;
 
     @DeleteMapping("/{buildingId}")
