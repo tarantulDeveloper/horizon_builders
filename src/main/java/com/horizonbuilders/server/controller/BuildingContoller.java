@@ -1,6 +1,7 @@
 package com.horizonbuilders.server.controller;
 
 import com.horizonbuilders.server.model.building.Building;
+import com.horizonbuilders.server.service.BuildingService;
 import com.horizonbuilders.server.service.impl.BuildingServiceImpl;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequestMapping("/building")
 public class BuildingContoller {
-    BuildingServiceImpl buildingService;
+    BuildingService buildingService;
 
     @DeleteMapping("/{buildingId}")
     public void deleteById(@PathVariable("BuildingId") int id) {
