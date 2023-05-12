@@ -1,18 +1,20 @@
 package com.horizonbuilders.server.service.impl;
 
+import com.horizonbuilders.server.dto.request.UserUpdateRequest;
 import com.horizonbuilders.server.dto.response.UserInfoResponse;
 import com.horizonbuilders.server.exception.AlreadyExistException;
 import com.horizonbuilders.server.exception.ResourceNotFoundException;
+import com.horizonbuilders.server.exception.UserNotFoundException;
 import com.horizonbuilders.server.mapper.UserMapper;
 import com.horizonbuilders.server.model.User;
 import com.horizonbuilders.server.model.enums.ERole;
 import com.horizonbuilders.server.repository.UserRepository;
+import com.horizonbuilders.server.service.CloudinaryService;
 import com.horizonbuilders.server.service.PositionService;
 import com.horizonbuilders.server.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,7 @@ public class UserServiceImpl implements UserService {
     final UserMapper userMapper;
     final PasswordEncoder passwordEncoder;
     final PositionService positionService;
+    final CloudinaryService cloudinaryService;
 
     @Override
     public UserInfoResponse addNewUser(int positionId, String username, String password) {
@@ -46,5 +49,17 @@ public class UserServiceImpl implements UserService {
     public UserInfoResponse findUserById(int id) {
         return userMapper.toUserInfoResponse(userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found!")));
+    }
+
+    @Override
+    public UserInfoResponse updateUser(UserUpdateRequest request, int userId) {
+        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        user.setFirstName(request.firstName());
+        user.setLastName(request.lastName());
+        user.setPhotoUrl(cloudinaryService.upload(request.photo()));
+        user.setPhoneNumber(request.phoneNumber());
+        user.setAddress(request.address());
+
+        return userMapper.toUserInfoResponse(userRepository.save(user));
     }
 }

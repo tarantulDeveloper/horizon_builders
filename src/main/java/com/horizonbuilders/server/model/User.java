@@ -21,7 +21,6 @@ import java.util.Set;
 @Builder
 public class User extends DefaultModel implements UserDetails {
     String username;
-    String email;
     String password;
     String firstName;
     String lastName;

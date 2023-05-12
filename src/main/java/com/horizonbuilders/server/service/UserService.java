@@ -1,5 +1,6 @@
 package com.horizonbuilders.server.service;
 
+import com.horizonbuilders.server.dto.request.UserUpdateRequest;
 import com.horizonbuilders.server.dto.response.UserInfoResponse;
 
 public interface UserService {
@@ -8,4 +9,5 @@ public interface UserService {
 
     UserInfoResponse findUserById(int id);
 
+    UserInfoResponse updateUser(UserUpdateRequest request, int userId);
 }

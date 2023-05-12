@@ -1,6 +1,7 @@
 package com.horizonbuilders.server.service.impl;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 import com.horizonbuilders.server.service.CloudinaryService;
 import lombok.AccessLevel;
@@ -19,13 +20,18 @@ public class CloudinaryServiceImpl implements CloudinaryService {
     final Cloudinary cloudinary;
 
     @Override
-    public String upload(MultipartFile multipartFile) throws IOException {
-        return String.valueOf(
-                cloudinary.uploader()
-                        .upload(multipartFile.getBytes(), ObjectUtils.asMap(
-                                "quality", 50
-                        ))
-                        .get("secure_url")
-        );
+    public String upload(MultipartFile multipartFile) {
+        try {
+            Transformation transformation = new Transformation().quality(50).fetchFormat("auto");
+            return String.valueOf(
+                    cloudinary.uploader()
+                            .upload(multipartFile.getBytes(), ObjectUtils.asMap(
+                                    "transformation", transformation.generate()
+                            ))
+                            .get("secure_url")
+            );
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

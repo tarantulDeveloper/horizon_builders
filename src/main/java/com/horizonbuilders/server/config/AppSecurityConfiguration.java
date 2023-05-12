@@ -27,7 +27,7 @@ public class AppSecurityConfiguration {
     final AuthEntryPoint authEntryPoint;
 
     private static final String[] WHITELIST = {
-            //swagger
+            /*//swagger
             "/swagger-resources/**",
             "/api-docs/**",
             "/v3/api-docs/**",
@@ -38,7 +38,8 @@ public class AppSecurityConfiguration {
 
             //endpoints
             "/api/authenticate/**",
-            "/api/refresh-token/**"
+            "/api/refresh-token/**"*/
+            "/**"
     };
 
     @Bean
