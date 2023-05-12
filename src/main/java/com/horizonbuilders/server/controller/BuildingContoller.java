@@ -16,17 +16,17 @@ public class BuildingContoller {
     BuildingServiceImpl buildingService;
 
     @DeleteMapping("/{buildingId}")
-    public void deleteById(@PathVariable("BuildingId") int id){
+    public void deleteById(@PathVariable("BuildingId") int id) {
         buildingService.deleteBuildingById(id);
     }
 
     @GetMapping
-    public List<Building> fetchAllBuildings(){
+    public List<Building> fetchAllBuildings() {
         return buildingService.getAllBuildings();
     }
 
     @GetMapping("/{buildingId}")
-    public Building getById(@PathVariable("buildingId") int id){
+    public Building getById(@PathVariable("buildingId") int id) {
         return buildingService.findBuildingById(id);
     }
 }

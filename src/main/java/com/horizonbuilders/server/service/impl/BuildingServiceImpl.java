@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class BuildingServiceImpl implements BuildingService{
+public class BuildingServiceImpl implements BuildingService {
     final BuildingRepository buildingRepository;
 
     @Override
@@ -31,6 +31,6 @@ public class BuildingServiceImpl implements BuildingService{
 
     @Override
     public Building findBuildingById(int id) {
-        return buildingRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Building not found!"));
+        return buildingRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Building not found!"));
     }
 }

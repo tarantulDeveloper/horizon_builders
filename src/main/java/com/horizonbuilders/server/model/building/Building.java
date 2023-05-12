@@ -6,7 +6,6 @@ import com.horizonbuilders.server.model.enums.EState;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import java.util.*;
 
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -23,7 +22,7 @@ public class Building extends DefaultModel {
     String imgUrl;
     @Enumerated(EnumType.STRING)
     EState state;
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "users_id")
     User employee;
 }

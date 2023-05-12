@@ -34,8 +34,8 @@ public class JwtFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain) throws ServletException, IOException {
         response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods","*");
-        response.setHeader("Access-Control-Allow-Headers","*");
+        response.setHeader("Access-Control-Allow-Methods", "*");
+        response.setHeader("Access-Control-Allow-Headers", "*");
 
         String authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer")) {
@@ -44,7 +44,7 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         String token = authHeader.split(" ")[1].trim();
-        if(token.isEmpty() || token.equals("null")) {
+        if (token.isEmpty() || token.equals("null")) {
             log.info("I'm here");
             filterChain.doFilter(request, response);
             return;
