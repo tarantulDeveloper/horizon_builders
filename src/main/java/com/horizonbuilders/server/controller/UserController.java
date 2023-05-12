@@ -9,6 +9,8 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -32,4 +34,5 @@ public class UserController {
     public UserInfoResponse updateUser(@ModelAttribute UserUpdateRequest request, @PathVariable("userId") int userId) {
         return userService.updateUser(request, userId);
     }
+
 }

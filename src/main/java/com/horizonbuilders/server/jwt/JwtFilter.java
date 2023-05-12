@@ -44,8 +44,7 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         String token = authHeader.split(" ")[1].trim();
-        if (token.isEmpty() || token.equals("null")) {
-            log.info("I'm here");
+        if (token.equals("null")) {
             filterChain.doFilter(request, response);
             return;
         }
