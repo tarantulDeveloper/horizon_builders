@@ -18,13 +18,13 @@ public class GlobalTypeServiceImpl implements GlobalTypeService {
     final GlobalTypeRepository globalTypeRepository;
 
     @Override
-    public void createGlobalType(String name) {
+    public GlobalType createGlobalType(String name) {
         if(globalTypeRepository.existsByName(name)) {
             throw new BadRequestException("Global type already exists!");
         }
         GlobalType globalType = new GlobalType();
         globalType.setName(name);
-        globalTypeRepository.save(globalType);
+        return globalTypeRepository.save(globalType);
     }
 
     @Override

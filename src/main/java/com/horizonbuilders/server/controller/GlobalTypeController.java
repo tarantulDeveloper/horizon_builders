@@ -1,5 +1,6 @@
 package com.horizonbuilders.server.controller;
 
+import com.horizonbuilders.server.dto.response.GlobalTypeResponse;
 import com.horizonbuilders.server.model.inventory.GlobalType;
 import com.horizonbuilders.server.service.GlobalTypeService;
 import lombok.AccessLevel;
@@ -19,12 +20,12 @@ public class GlobalTypeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createGlobalType(@RequestParam("name") String name) {
-        globalTypeService.createGlobalType(name);
+    public GlobalType createGlobalType(@RequestParam("name") String name) {
+        return globalTypeService.createGlobalType(name);
     }
 
     @GetMapping
-    public List<GlobalType> fetchAllGlobalTypes() {
+    public List<GlobalTypeResponse> fetchAllGlobalTypes() {
         return globalTypeService.fetchAllGlobalTypes();
     }
 }
