@@ -3,15 +3,16 @@ package com.horizonbuilders.server.model.building;
 import com.horizonbuilders.server.model.DefaultModel;
 import com.horizonbuilders.server.model.enums.EStatus;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Apartment extends DefaultModel {
     int apartmentNumber;
     int floorNumber;

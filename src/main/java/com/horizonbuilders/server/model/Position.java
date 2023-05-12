@@ -11,7 +11,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Position extends DefaultModel{
+public class Position extends DefaultModel {
     String name;
     double salary;
 }

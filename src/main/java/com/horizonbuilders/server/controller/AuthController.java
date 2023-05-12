@@ -5,7 +5,6 @@ import com.horizonbuilders.server.dto.request.RefreshAccessTokenRequest;
 import com.horizonbuilders.server.dto.response.LoginResponse;
 import com.horizonbuilders.server.service.AuthService;
 import com.horizonbuilders.server.service.RefreshTokenService;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;

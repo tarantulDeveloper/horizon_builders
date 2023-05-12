@@ -24,13 +24,8 @@ public class UserServiceImpl implements UserService {
     final PasswordEncoder passwordEncoder;
     final PositionService positionService;
 
-//    @Override
-//    public User getUserById(int id) {
-//        return userRepository.findById(id)
-//                .orElseThrow(()-> new ResourceNotFoundException("No such user"));
-//    }
     @Override
-    public UserResponse addNewUser(int positionId,String username,String password) {
+    public UserResponse addNewUser(int positionId, String username, String password) {
         User user = User.builder()
                 .username(username)
                 .password(passwordEncoder.encode(password))

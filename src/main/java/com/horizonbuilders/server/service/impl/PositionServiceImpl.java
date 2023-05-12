@@ -19,17 +19,18 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PositionServiceImpl implements PositionService {
     final PositionRepository positionRepository;
+
     @Override
     public List<Position> getAllPositions() {
         return positionRepository.findAll();
     }
 
     @Override
-    public Position addPosition(String name, double salary) throws IOException{
-        if(positionRepository.existsByName(name)){
+    public Position addPosition(String name, double salary) throws IOException {
+        if (positionRepository.existsByName(name)) {
             throw new AlreadyExistException("This position is already exist!");
         }
-        if(salary<0){
+        if (salary < 0) {
             throw new BadRequestException("Salary can be only more or equal to 0!");
         }
         Position position = Position.builder()
@@ -47,10 +48,10 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public void updatePosition(String name, double salary,int id) {
+    public void updatePosition(String name, double salary, int id) {
         Position updatingPosition = positionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Position not found"));
-        if(salary<0){
+        if (salary < 0) {
             throw new BadRequestException("Salary can be only more or equal to 0!");
         }
         updatingPosition.setName(name);
@@ -61,7 +62,7 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public Position findPositionById(int id) {
-        return positionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Position not found!"));
+        return positionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Position not found!"));
     }
 
 }
