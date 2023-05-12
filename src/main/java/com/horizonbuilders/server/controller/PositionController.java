@@ -4,7 +4,9 @@ import com.horizonbuilders.server.model.Position;
 import com.horizonbuilders.server.service.PositionService;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +14,11 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/position")
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@RequestMapping("/position")
 public class PositionController {
-    @Autowired
-    private final PositionService positionService;
+    final PositionService positionService;
 
     @PostMapping
     public Position addPosition(

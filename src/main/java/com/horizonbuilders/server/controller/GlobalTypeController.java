@@ -1,6 +1,5 @@
 package com.horizonbuilders.server.controller;
 
-import com.horizonbuilders.server.dto.response.GlobalTypeResponse;
 import com.horizonbuilders.server.model.inventory.GlobalType;
 import com.horizonbuilders.server.service.GlobalTypeService;
 import lombok.AccessLevel;

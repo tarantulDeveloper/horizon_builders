@@ -1,8 +1,7 @@
 package com.horizonbuilders.server.controller;
 
 import com.horizonbuilders.server.dto.response.UserInfoResponse;
-import com.horizonbuilders.server.dto.response.UserResponse;
-import com.horizonbuilders.server.service.impl.UserServiceImpl;
+import com.horizonbuilders.server.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -13,17 +12,20 @@ import org.springframework.web.bind.annotation.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequestMapping("/api/user")
 public class UserController {
-    final UserServiceImpl userService;
+    final UserService userService;
 
     @PostMapping
-    public UserResponse addUser(@RequestParam("id") int positionId,
-                                @RequestParam("username") String username,
-                                @RequestParam("password") String password) {
+    public UserInfoResponse addUser(@RequestParam("id") int positionId,
+                                    @RequestParam("username") String username,
+                                    @RequestParam("password") String password) {
         return userService.addNewUser(positionId, username, password);
     }
 
     @GetMapping("/{userId}")
-    public UserInfoResponse getById(@PathVariable("userId") int id){
-        return userService.findUserById(id);
+    public UserInfoResponse getById(@PathVariable("userId") int userId) {
+        return userService.findUserById(userId);
     }
+
+//    @PutMapping("/{userId}")
+//    public User
 }
