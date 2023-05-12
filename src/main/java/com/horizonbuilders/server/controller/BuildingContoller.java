@@ -2,7 +2,6 @@ package com.horizonbuilders.server.controller;
 
 import com.horizonbuilders.server.model.building.Building;
 import com.horizonbuilders.server.service.BuildingService;
-import com.horizonbuilders.server.service.impl.BuildingServiceImpl;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

@@ -23,7 +23,6 @@ public class AdminRegister implements CommandLineRunner {
             userRepository.save(
                     User.builder()
                             .username("username")
-                            .email("email")
                             .password(passwordEncoder.encode("password"))
                             .firstName("firstName")
                             .lastName("lastName")
