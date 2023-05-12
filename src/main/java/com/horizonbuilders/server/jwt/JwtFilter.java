@@ -8,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +22,7 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Slf4j
 public class JwtFilter extends OncePerRequestFilter {
 
     final JwtUtils jwtUtils;
@@ -35,11 +37,6 @@ public class JwtFilter extends OncePerRequestFilter {
         response.setHeader("Access-Control-Allow-Methods","*");
         response.setHeader("Access-Control-Allow-Headers","*");
 
-        if (request.getRequestURI().endsWith("/api/authenticate")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
         String authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer")) {
             filterChain.doFilter(request, response);
@@ -47,6 +44,11 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         String token = authHeader.split(" ")[1].trim();
+        if(token.isEmpty() || token.equals("null")) {
+            log.info("I'm here");
+            filterChain.doFilter(request, response);
+            return;
+        }
         if (!jwtUtils.validate(token)) {
             filterChain.doFilter(request, response);
             return;
