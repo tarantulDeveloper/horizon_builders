@@ -1,5 +1,6 @@
 package com.horizonbuilders.server.config;
 
+import com.horizonbuilders.server.model.Position;
 import com.horizonbuilders.server.model.User;
 import com.horizonbuilders.server.model.enums.ERole;
 import com.horizonbuilders.server.repository.UserRepository;
@@ -29,8 +30,8 @@ public class AdminRegister implements CommandLineRunner {
                             .photoUrl("someUrl")
                             .phoneNumber("3848328")
                             .address("Bishkek")
-                            .active(true)
                             .enabled(true)
+                            .position(Position.builder().name("admin").salary(1500).build())
                             .roles(Set.of(ERole.ADMIN))
                             .build()
             );
