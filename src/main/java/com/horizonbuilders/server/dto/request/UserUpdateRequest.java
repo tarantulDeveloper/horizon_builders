@@ -7,6 +7,7 @@ public record UserUpdateRequest(
         String lastName,
         MultipartFile photo,
         String phoneNumber,
-        String address
+        String address,
+        String password
 ) {
 }
