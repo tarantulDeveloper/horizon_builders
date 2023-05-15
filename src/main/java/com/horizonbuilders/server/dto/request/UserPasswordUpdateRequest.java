@@ -1,8 +1,7 @@
 package com.horizonbuilders.server.dto.request;
 
-public record UserRequest(
-        int positionId,
-        String username,
+public record UserPasswordUpdateRequest(
+        int userId,
         String password
 ) {
 }
