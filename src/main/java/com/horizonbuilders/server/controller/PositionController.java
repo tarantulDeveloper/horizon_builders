@@ -1,5 +1,6 @@
 package com.horizonbuilders.server.controller;
 
+import com.horizonbuilders.server.dto.request.PositionRequest;
 import com.horizonbuilders.server.model.Position;
 import com.horizonbuilders.server.service.PositionService;
 import jakarta.validation.constraints.NotBlank;
@@ -15,15 +16,14 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@RequestMapping("/position")
+@RequestMapping("/api/position")
 public class PositionController {
     final PositionService positionService;
 
     @PostMapping
     public Position addPosition(
-            @NotNull @NotBlank @RequestParam("name") String name,
-            @RequestParam("salary") double salary) throws IOException {
-        return positionService.addPosition(name, salary);
+            @RequestBody PositionRequest request) {
+        return positionService.addPosition(request.name(), request.salary());
     }
 
     @GetMapping
@@ -32,20 +32,19 @@ public class PositionController {
     }
 
     @DeleteMapping("/{positionId}")
-    public void deleteById(@PathVariable("positionId") int id) throws IOException {
-        positionService.deletePositionById(id);
+    public void deleteById(@PathVariable("positionId") int positionId) {
+        positionService.deletePositionById(positionId);
     }
 
     @PutMapping("/{positionId}")
     public void updateById(
-            @PathVariable("positionId") int id,
-            @RequestParam("name") String name,
-            @RequestParam("salary") double salary) {
-        positionService.updatePosition(name, salary, id);
+            @PathVariable("positionId") int positionId,
+            @RequestBody PositionRequest request) {
+        positionService.updatePosition(request.name(), request.salary(), positionId);
     }
 
     @GetMapping("/{positionId}")
-    public Position getById(@PathVariable("positionId") int id) {
-        return positionService.findPositionById(id);
+    public Position getById(@PathVariable("positionId") int positionId) {
+        return positionService.findPositionById(positionId);
     }
 }

@@ -8,12 +8,12 @@ import java.util.List;
 public interface PositionService {
     List<Position> getAllPositions();
 
-    Position addPosition(String name, double salary) throws IOException;
+    Position addPosition(String name, double salary);
 
-    void updatePosition(String name, double salary, int id);
+    void updatePosition(String name, double salary, int positionId);
 
-    void deletePositionById(int id) throws IOException;
+    void deletePositionById(int positionId);
 
     //
-    Position findPositionById(int id);
+    Position findPositionById(int positionId);
 }

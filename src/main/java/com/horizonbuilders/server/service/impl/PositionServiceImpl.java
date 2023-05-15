@@ -10,8 +10,6 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -26,7 +24,7 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public Position addPosition(String name, double salary) throws IOException {
+    public Position addPosition(String name, double salary) {
         if (positionRepository.existsByName(name)) {
             throw new AlreadyExistException("This position is already exist!");
         }
@@ -41,15 +39,15 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public void deletePositionById(int id) throws IOException {
-        Position position = positionRepository.findById(id)
+    public void deletePositionById(int positionId) {
+        Position position = positionRepository.findById(positionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Position not found!"));
-        positionRepository.deleteById(id);
+        positionRepository.deleteById(positionId);
     }
 
     @Override
-    public void updatePosition(String name, double salary, int id) {
-        Position updatingPosition = positionRepository.findById(id)
+    public void updatePosition(String name, double salary, int positionId) {
+        Position updatingPosition = positionRepository.findById(positionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Position not found"));
         if (salary < 0) {
             throw new BadRequestException("Salary can be only more or equal to 0!");
@@ -61,8 +59,8 @@ public class PositionServiceImpl implements PositionService {
 
 
     @Override
-    public Position findPositionById(int id) {
-        return positionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Position not found!"));
+    public Position findPositionById(int positionId) {
+        return positionRepository.findById(positionId).orElseThrow(() -> new ResourceNotFoundException("Position not found!"));
     }
 
 }
