@@ -2,6 +2,7 @@ package com.horizonbuilders.server.model.inventory;
 
 import com.horizonbuilders.server.model.DefaultModel;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -17,4 +18,7 @@ public class Product extends DefaultModel {
     int quantity;
     String imgUrl;
     double price;
+    @ManyToOne
+    SubType subType;
+
 }

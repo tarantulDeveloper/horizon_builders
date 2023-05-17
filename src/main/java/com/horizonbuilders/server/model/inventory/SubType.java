@@ -1,9 +1,7 @@
 package com.horizonbuilders.server.model.inventory;
 
 import com.horizonbuilders.server.model.DefaultModel;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +16,9 @@ import java.util.List;
 @Setter
 public class SubType extends DefaultModel {
     String name;
+    @ManyToOne
+    GlobalType globalType;
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-//    @JoinColumn(name = "sub_type_id")
+    @JoinColumn(name = "sub_type_id")
     List<Product> productList = new ArrayList<>();
 }
