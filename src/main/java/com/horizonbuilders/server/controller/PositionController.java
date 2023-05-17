@@ -1,5 +1,6 @@
 package com.horizonbuilders.server.controller;
 
+import com.horizonbuilders.server.dto.request.PositionRequest;
 import com.horizonbuilders.server.model.Position;
 import com.horizonbuilders.server.service.PositionService;
 import jakarta.validation.constraints.NotBlank;
@@ -21,9 +22,10 @@ public class PositionController {
 
     @PostMapping
     public Position addPosition(
-            @NotNull @NotBlank @RequestParam("name") String name,
-            @RequestParam("salary") double salary) throws IOException {
-        return positionService.addPosition(name, salary);
+//            @NotNull @NotBlank @RequestParam("name") String name,
+//            @RequestParam("salary") double salary
+            @RequestBody PositionRequest request) throws IOException {
+        return positionService.addPosition(request.name(), request.salary());
     }
 
     @GetMapping
