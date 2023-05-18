@@ -1,6 +1,5 @@
 package com.horizonbuilders.server.controller;
 
-import com.horizonbuilders.server.dto.request.GlobalTypeRequest;
 import com.horizonbuilders.server.dto.request.SubTypeRequest;
 import com.horizonbuilders.server.dto.request.SubTypeUpdateRequest;
 import com.horizonbuilders.server.model.inventory.SubType;
@@ -22,7 +21,7 @@ public class SubTypeController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public SubType addSubType(@RequestBody SubTypeRequest request) {
-        return subTypeService.addSubType(request.name(),request.id());
+        return subTypeService.addSubType(request.name(), request.id());
     }
 
     @PreAuthorize("hasAnyAuthority({'ADMIN', 'WORKER'})")
@@ -31,25 +30,25 @@ public class SubTypeController {
             @RequestParam(defaultValue = "0") int pageNo,
             @RequestParam(defaultValue = "3") int pageSize,
             @RequestParam(defaultValue = "id") String sortBy
-    ){
-        return subTypeService.getAllSubTypes(pageNo,pageSize,sortBy);
+    ) {
+        return subTypeService.getAllSubTypes(pageNo, pageSize, sortBy);
     }
 
     @PreAuthorize("hasAnyAuthority({'ADMIN', 'WORKER'})")
     @GetMapping("{subTypeId}")
-    public SubType getSubTypeById(@PathVariable("subTypeId") int subTypeId){
+    public SubType getSubTypeById(@PathVariable("subTypeId") int subTypeId) {
         return subTypeService.getById(subTypeId);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("{subTypeId}")
-    public void deleteById(@PathVariable("subTypeId") int subTypeId){
-         subTypeService.deleteById(subTypeId);
+    public void deleteById(@PathVariable("subTypeId") int subTypeId) {
+        subTypeService.deleteById(subTypeId);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping
-    public SubType updateSubType(@RequestBody SubTypeUpdateRequest request){
+    public SubType updateSubType(@RequestBody SubTypeUpdateRequest request) {
         return subTypeService.updateSubType(request, request.id());
     }
 
