@@ -53,6 +53,10 @@ public class UserController {
         return userService.updatePassword(request.password(), user);
     }
 
+    // TODO: create the method to enable user or vice versa
+    // TODO: logging
+    // TODO: global type projections
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/user")
     public Page<UserInfoResponse> getAllUsers(

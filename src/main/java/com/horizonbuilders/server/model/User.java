@@ -28,7 +28,7 @@ public class User extends DefaultModel implements UserDetails {
     String phoneNumber;
     String address;
     boolean enabled;
-    @ManyToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "position_id")
     Position position;
     @ElementCollection(targetClass = ERole.class, fetch = FetchType.EAGER)
