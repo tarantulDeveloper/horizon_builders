@@ -51,14 +51,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserInfoResponse findUserById(int id) {
-        return userMapper.toUserInfoResponse(userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found!")));
-    }
-
-    @Override
-    public UserInfoResponse updateUser(UserUpdateRequest request, int userId) {
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+    public UserInfoResponse updateUser(UserUpdateRequest request, User user) {
         user.setFirstName(request.firstName());
         user.setLastName(request.lastName());
         user.setPhoneNumber(request.phoneNumber());
@@ -76,17 +69,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserInfoResponse updatePhoto(MultipartFile photo, int userId) {
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+    public UserInfoResponse updatePhoto(MultipartFile photo, User user) {
         user.setPhotoUrl(cloudinaryService.upload(photo));
 
         return userMapper.toUserInfoResponse(userRepository.save(user));
     }
 
     @Override
-    public UserInfoResponse updatePassword(String password, int userId) {
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+    public UserInfoResponse updatePassword(String password, User user) {
         user.setPassword(passwordEncoder.encode(password));
         return userMapper.toUserInfoResponse(userRepository.save(user));
+    }
+
+    @Override
+    public UserInfoResponse findUser(User user) {
+        return userMapper.toUserInfoResponse(user);
     }
 }
