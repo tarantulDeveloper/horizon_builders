@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     final UserService userService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public UserInfoResponse addUser(@RequestBody UserRequest request) {
         return userService.addNewUser(request.positionId(), request.username(), request.password());

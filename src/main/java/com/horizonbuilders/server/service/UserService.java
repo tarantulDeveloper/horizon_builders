@@ -5,8 +5,6 @@ import com.horizonbuilders.server.dto.response.UserInfoResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-
 public interface UserService {
 
     UserInfoResponse addNewUser(int positionId, String username, String password);
