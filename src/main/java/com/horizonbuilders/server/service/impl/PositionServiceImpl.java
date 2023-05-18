@@ -9,10 +9,11 @@ import com.horizonbuilders.server.service.PositionService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,12 +22,13 @@ public class PositionServiceImpl implements PositionService {
     final PositionRepository positionRepository;
 
     @Override
-    public List<Position> getAllPositions() {
-        return positionRepository.findAll();
+    public Page<Position> getAllPositions(int pageNo, int pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
+        return positionRepository.findAll(pageable);
     }
 
     @Override
-    public Position addPosition(String name, double salary) throws IOException {
+    public Position addPosition(String name, double salary) {
         if (positionRepository.existsByName(name)) {
             throw new AlreadyExistException("This position is already exist!");
         }
@@ -41,28 +43,31 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public void deletePositionById(int id) throws IOException {
-        Position position = positionRepository.findById(id)
+    public void deletePositionById(int positionId) {
+        Position position = positionRepository.findById(positionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Position not found!"));
-        positionRepository.deleteById(id);
+        positionRepository.deleteById(positionId);
     }
 
     @Override
-    public void updatePosition(String name, double salary, int id) {
-        Position updatingPosition = positionRepository.findById(id)
+    public Position updatePosition(String name, double salary, int positionId) {
+        Position updatingPosition = positionRepository.findById(positionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Position not found"));
         if (salary < 0) {
             throw new BadRequestException("Salary can be only more or equal to 0!");
         }
+        if (positionRepository.existsByName(name)) {
+            throw new AlreadyExistException("This position is already exist!");
+        }
         updatingPosition.setName(name);
         updatingPosition.setSalary(salary);
-        positionRepository.save(updatingPosition);
+        return positionRepository.save(updatingPosition);
     }
 
 
     @Override
-    public Position findPositionById(int id) {
-        return positionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Position not found!"));
+    public Position getPositionById(int positionId) {
+        return positionRepository.findById(positionId).orElseThrow(() -> new ResourceNotFoundException("Position not found!"));
     }
 
 }

@@ -34,16 +34,16 @@ public class JwtFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain) throws ServletException, IOException {
         response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "GET,POST,DELETE,PUT,OPTIONS");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
 
-        if(request.getMethod().equals("OPTIONS")) {
-            response.setStatus(200);
+        if (request.getMethod().equals("OPTIONS")) {
+            response.setStatus(HttpServletResponse.SC_OK);
             return;
         }
 
-        if (request.getRequestURI().endsWith("/api/authenticate") || request.getRequestURI().endsWith("/api/refresh-token")) {
-            filterChain.doFilter(request, response);
+        if(request.getRequestURI().endsWith("/api/authenticate") || request.getRequestURI().endsWith("/api/refresh-token")){
+            filterChain.doFilter(request,response);
             return;
         }
 

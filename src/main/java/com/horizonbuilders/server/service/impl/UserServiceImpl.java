@@ -15,11 +15,14 @@ import com.horizonbuilders.server.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -41,7 +44,7 @@ public class UserServiceImpl implements UserService {
                 .username(username)
                 .password(passwordEncoder.encode(password))
                 .enabled(true)
-                .position(positionService.findPositionById(positionId))
+                .position(positionService.getPositionById(positionId))
                 .roles(Set.of(ERole.WORKER))
                 .build();
         return userMapper.toUserInfoResponse(userRepository.save(user));
@@ -58,11 +61,32 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         user.setFirstName(request.firstName());
         user.setLastName(request.lastName());
-        user.setPhotoUrl(cloudinaryService.upload(request.photo()));
         user.setPhoneNumber(request.phoneNumber());
         user.setAddress(request.address());
 
         return userMapper.toUserInfoResponse(userRepository.save(user));
     }
 
+    @Override
+    public Page<UserInfoResponse> getAllUsers(
+            int pageNo, int pageSize, String sortBy
+    ) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
+        return userRepository.findAll(pageable).map(userMapper::toUserInfoResponse);
+    }
+
+    @Override
+    public UserInfoResponse updatePhoto(MultipartFile photo, int userId) {
+        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        user.setPhotoUrl(cloudinaryService.upload(photo));
+
+        return userMapper.toUserInfoResponse(userRepository.save(user));
+    }
+
+    @Override
+    public UserInfoResponse updatePassword(String password, int userId) {
+        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        user.setPassword(passwordEncoder.encode(password));
+        return userMapper.toUserInfoResponse(userRepository.save(user));
+    }
 }
