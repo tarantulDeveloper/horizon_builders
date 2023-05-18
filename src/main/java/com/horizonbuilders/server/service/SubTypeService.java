@@ -5,7 +5,7 @@ import com.horizonbuilders.server.model.inventory.SubType;
 import org.springframework.data.domain.Page;
 
 public interface SubTypeService {
-    SubType addSubType(String name,int globalTypeId);
+    SubType addSubType(String name, int globalTypeId);
 
     Page<SubType> getAllSubTypes(int pageNo, int pageSize, String sortBy);
 

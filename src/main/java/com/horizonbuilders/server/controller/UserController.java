@@ -47,6 +47,7 @@ public class UserController {
     public UserInfoResponse updatePassword(@RequestBody UserPasswordUpdateRequest request) {
         return userService.updatePassword(request.password(), request.userId());
     }
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public Page<UserInfoResponse> getAllUsers(

@@ -1,11 +1,10 @@
 package com.horizonbuilders.server.controller;
 
-import com.horizonbuilders.server.dto.request.*;
-import com.horizonbuilders.server.dto.response.UserInfoResponse;
+import com.horizonbuilders.server.dto.request.ProductImgUpdateRequest;
+import com.horizonbuilders.server.dto.request.ProductRequest;
+import com.horizonbuilders.server.dto.request.ProductUpdateRequest;
 import com.horizonbuilders.server.model.inventory.Product;
-import com.horizonbuilders.server.model.inventory.SubType;
 import com.horizonbuilders.server.service.ProductService;
-import com.horizonbuilders.server.service.SubTypeService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -23,7 +22,7 @@ public class ProductController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Product addProduct(@ModelAttribute ProductRequest request){
+    public Product addProduct(@ModelAttribute ProductRequest request) {
         return productService.createProduct(request);
     }
 
@@ -33,26 +32,26 @@ public class ProductController {
             @RequestParam(defaultValue = "0") int pageNo,
             @RequestParam(defaultValue = "3") int pageSize,
             @RequestParam(defaultValue = "id") String sortBy
-    ){
-        return productService.getAllProducts(pageNo,pageSize,sortBy);
+    ) {
+        return productService.getAllProducts(pageNo, pageSize, sortBy);
     }
 
     @PreAuthorize("hasAnyAuthority({'ADMIN', 'WORKER'})")
     @GetMapping("/{productId}")
-    public Product getProductById(@PathVariable("productId") int productId){
+    public Product getProductById(@PathVariable("productId") int productId) {
         return productService.getById(productId);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{productId}")
-    public void deleteById(@PathVariable("productId") int productId){
+    public void deleteById(@PathVariable("productId") int productId) {
         productService.deleteById(productId);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping
-    public Product updateProduct(@RequestBody ProductUpdateRequest request){
-        return productService.updateProduct(request,request.id());
+    public Product updateProduct(@RequestBody ProductUpdateRequest request) {
+        return productService.updateProduct(request, request.id());
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")

@@ -4,7 +4,6 @@ import com.horizonbuilders.server.dto.request.SubTypeUpdateRequest;
 import com.horizonbuilders.server.exception.AlreadyExistException;
 import com.horizonbuilders.server.exception.ResourceNotFoundException;
 import com.horizonbuilders.server.model.inventory.SubType;
-import com.horizonbuilders.server.repository.GlobalTypeRepository;
 import com.horizonbuilders.server.repository.SubTypeRepository;
 import com.horizonbuilders.server.service.GlobalTypeService;
 import com.horizonbuilders.server.service.SubTypeService;
@@ -25,7 +24,7 @@ public class SubTypeServiceImpl implements SubTypeService {
     final GlobalTypeService globalTypeService;
 
     @Override
-    public SubType addSubType(String name,int globalTypeId) {
+    public SubType addSubType(String name, int globalTypeId) {
         if (subTypeRepository.existsByName(name)) {
             throw new AlreadyExistException("Sub type already exists!");
         }
@@ -37,27 +36,27 @@ public class SubTypeServiceImpl implements SubTypeService {
 
     @Override
     public Page<SubType> getAllSubTypes(int pageNo, int pageSize, String sortBy) {
-        Pageable pageable = PageRequest.of(pageNo,pageSize, Sort.by(sortBy).descending());
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
         return subTypeRepository.findAll(pageable);
     }
 
     @Override
     public SubType getById(int subTypeId) {
         return subTypeRepository.findById(subTypeId)
-                .orElseThrow(()-> new ResourceNotFoundException("Sub type not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Sub type not found!"));
     }
 
     @Override
     public void deleteById(int subTypeId) {
         SubType subType = subTypeRepository.findById(subTypeId)
-                .orElseThrow(()-> new ResourceNotFoundException("Sub type not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Sub type not found!"));
         subTypeRepository.deleteById(subTypeId);
     }
 
     @Override
     public SubType updateSubType(SubTypeUpdateRequest request, int id) {
         SubType updateSubType = subTypeRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Sub type not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Sub type not found!"));
         if (subTypeRepository.existsByName(request.name())) {
             throw new AlreadyExistException("Sub type already exists!");
         }
