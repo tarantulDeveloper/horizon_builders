@@ -6,7 +6,6 @@ import com.horizonbuilders.server.exception.AlreadyExistException;
 import com.horizonbuilders.server.exception.ResourceNotFoundException;
 import com.horizonbuilders.server.exception.UserNotFoundException;
 import com.horizonbuilders.server.mapper.UserMapper;
-import com.horizonbuilders.server.model.Position;
 import com.horizonbuilders.server.model.User;
 import com.horizonbuilders.server.model.enums.ERole;
 import com.horizonbuilders.server.repository.UserRepository;
@@ -24,8 +23,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -47,7 +44,7 @@ public class UserServiceImpl implements UserService {
                 .username(username)
                 .password(passwordEncoder.encode(password))
                 .enabled(true)
-                .position(positionService.findPositionById(positionId))
+                .position(positionService.getPositionById(positionId))
                 .roles(Set.of(ERole.WORKER))
                 .build();
         return userMapper.toUserInfoResponse(userRepository.save(user));

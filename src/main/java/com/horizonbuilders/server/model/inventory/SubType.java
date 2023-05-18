@@ -1,5 +1,6 @@
 package com.horizonbuilders.server.model.inventory;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.horizonbuilders.server.model.DefaultModel;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -16,6 +17,7 @@ import java.util.List;
 @Setter
 public class SubType extends DefaultModel {
     String name;
+    @JsonIgnore
     @ManyToOne
     GlobalType globalType;
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})

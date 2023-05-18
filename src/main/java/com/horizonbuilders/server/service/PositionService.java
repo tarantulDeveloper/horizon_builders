@@ -1,19 +1,16 @@
 package com.horizonbuilders.server.service;
 
 import com.horizonbuilders.server.model.Position;
-
-import java.io.IOException;
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface PositionService {
-    List<Position> getAllPositions();
+    Page<Position> getAllPositions(int pageNo, int pageSize, String sortBy);
 
     Position addPosition(String name, double salary);
 
-    void updatePosition(String name, double salary, int positionId);
+    Position updatePosition(String name, double salary, int positionId);
 
     void deletePositionById(int positionId);
 
-    //
-    Position findPositionById(int positionId);
+    Position getPositionById(int positionId);
 }
