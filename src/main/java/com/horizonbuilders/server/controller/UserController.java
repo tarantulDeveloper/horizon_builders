@@ -11,10 +11,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 
 @RestController
@@ -39,22 +37,22 @@ public class UserController {
         return userService.updateUser(request, request.id());
     }
 
-    @PutMapping(value = "/photo",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PutMapping(value = "/photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public UserInfoResponse updatePhoto(@ModelAttribute UserPhotoUpdateRequest request) {
-        return userService.updatePhoto(request.photo(),request.userId());
+        return userService.updatePhoto(request.photo(), request.userId());
     }
 
     @PutMapping("/password")
-    public UserInfoResponse updatePassword(@RequestBody UserPasswordUpdateRequest request){
-        return userService.updatePassword(request.password(),request.userId());
+    public UserInfoResponse updatePassword(@RequestBody UserPasswordUpdateRequest request) {
+        return userService.updatePassword(request.password(), request.userId());
     }
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public Page<UserInfoResponse> getAllUsers(
             @RequestParam(defaultValue = "0") int pageNo,
             @RequestParam(defaultValue = "3") int pageSize,
             @RequestParam(defaultValue = "id") String sortBy
-    ){
+    ) {
         return userService.getAllUsers(pageNo, pageSize, sortBy);
     }
 
