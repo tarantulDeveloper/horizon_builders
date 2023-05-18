@@ -3,7 +3,6 @@ package com.horizonbuilders.server.service.impl;
 import com.horizonbuilders.server.dto.request.GlobalTypeUpdateRequest;
 import com.horizonbuilders.server.exception.BadRequestException;
 import com.horizonbuilders.server.exception.ResourceNotFoundException;
-import com.horizonbuilders.server.mapper.GlobalTypeMapper;
 import com.horizonbuilders.server.model.inventory.GlobalType;
 import com.horizonbuilders.server.repository.GlobalTypeRepository;
 import com.horizonbuilders.server.service.GlobalTypeService;
@@ -21,7 +20,6 @@ import org.springframework.stereotype.Service;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class GlobalTypeServiceImpl implements GlobalTypeService {
     final GlobalTypeRepository globalTypeRepository;
-    final GlobalTypeMapper globalTypeMapper;
 
     @Override
     public GlobalType createGlobalType(String name) {
