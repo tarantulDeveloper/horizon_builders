@@ -23,17 +23,17 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
     final ProductRepository productRepository;
     final CloudinaryService cloudinaryService;
     final SubTypeService subTypeService;
 
     @Override
     public Product createProduct(ProductRequest request) {
-        if (productRepository.existsByName(request.name())){
+        if (productRepository.existsByName(request.name())) {
             throw new AlreadyExistException("Product already exists!");
         }
-        if(request.price()<0 || request.quantity()<0){
+        if (request.price() < 0 || request.quantity() < 0) {
             throw new BadRequestException("Price or quantity should be more than 0!");
         }
         Product product = Product.builder()
@@ -49,31 +49,31 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Page<Product> getAllProducts(int pageNo, int pageSize, String sortBy) {
-        Pageable pageable = PageRequest.of(pageNo,pageSize, Sort.by(sortBy).descending());
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
         return productRepository.findAll(pageable);
     }
 
     @Override
     public Product getById(int productId) {
         return productRepository.findById(productId)
-                .orElseThrow(()-> new ResourceNotFoundException("Product not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found!"));
     }
 
     @Override
     public void deleteById(int productId) {
         Product product = productRepository.findById(productId)
-                .orElseThrow(()-> new ResourceNotFoundException("Product not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found!"));
         productRepository.deleteById(productId);
     }
 
     @Override
     public Product updateProduct(ProductUpdateRequest request, int id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Product not found!"));
-        if (productRepository.existsByName(request.name())){
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found!"));
+        if (productRepository.existsByName(request.name())) {
             throw new AlreadyExistException("Product already exists!");
         }
-        if(request.price()<0 || request.quantity()<0){
+        if (request.price() < 0 || request.quantity() < 0) {
             throw new BadRequestException("Price or quantity should be more than 0!");
         }
         product.setName(request.name());
@@ -86,7 +86,7 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Product updateImg(MultipartFile img, int id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Product not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found!"));
         product.setImgUrl(cloudinaryService.upload(img));
         return productRepository.save(product);
     }
