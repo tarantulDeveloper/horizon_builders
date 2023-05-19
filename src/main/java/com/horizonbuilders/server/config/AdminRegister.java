@@ -29,7 +29,7 @@ public class AdminRegister implements CommandLineRunner {
                             .photoUrl("someUrl")
                             .phoneNumber("3848328")
                             .address("Bishkek")
-                            .enabled(true)
+                            .active(true)
                             .position(Position.builder().name("admin").salary(1500).build())
                             .roles(Set.of(ERole.ADMIN))
                             .build()
