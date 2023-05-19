@@ -56,9 +56,6 @@ public class PositionServiceImpl implements PositionService {
         if (salary < 0) {
             throw new BadRequestException("Salary can be only more or equal to 0!");
         }
-        if (positionRepository.existsByName(name)) {
-            throw new AlreadyExistException("This position is already exist!");
-        }
         updatingPosition.setName(name);
         updatingPosition.setSalary(salary);
         return positionRepository.save(updatingPosition);
