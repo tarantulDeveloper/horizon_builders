@@ -2,6 +2,8 @@ package com.horizonbuilders.server.dto.response;
 
 import com.horizonbuilders.server.model.Position;
 
+import java.util.List;
+
 public record UserInfoResponse(
         int id,
         String username,
@@ -10,6 +12,8 @@ public record UserInfoResponse(
         String photoUrl,
         String phoneNumber,
         String address,
-        Position position
+        boolean active,
+        Position position,
+        List<String> roles
 ) {
 }
