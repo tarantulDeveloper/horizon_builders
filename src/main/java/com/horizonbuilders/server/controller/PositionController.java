@@ -1,6 +1,7 @@
 package com.horizonbuilders.server.controller;
 
 import com.horizonbuilders.server.dto.request.PositionRequest;
+
 import com.horizonbuilders.server.dto.request.PositionUpdateRequest;
 import com.horizonbuilders.server.model.Position;
 import com.horizonbuilders.server.service.PositionService;
@@ -21,6 +22,7 @@ public class PositionController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public Position addPosition(
+
             @RequestBody PositionRequest request) {
         return positionService.addPosition(request.name(), request.salary());
     }

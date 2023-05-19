@@ -5,6 +5,7 @@ import com.horizonbuilders.server.dto.request.UserPhotoUpdateRequest;
 import com.horizonbuilders.server.dto.request.UserRequest;
 import com.horizonbuilders.server.dto.request.UserUpdateRequest;
 import com.horizonbuilders.server.dto.response.UserInfoResponse;
+import com.horizonbuilders.server.model.User;
 import com.horizonbuilders.server.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -12,44 +13,52 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@RequestMapping("/api/user")
+@RequestMapping("/api")
 public class UserController {
     final UserService userService;
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping
+    @PostMapping("/user")
     public UserInfoResponse addUser(@RequestBody UserRequest request) {
         return userService.addNewUser(request.positionId(), request.username(), request.password());
     }
 
-    @GetMapping("/{userId}")
-    public UserInfoResponse getById(@PathVariable("userId") int userId) {
-        return userService.findUserById(userId);
+    @GetMapping("/me")
+    public UserInfoResponse getMe(@AuthenticationPrincipal User user) {
+        return userService.findUser(user);
     }
 
-    @PutMapping
-    public UserInfoResponse updateUser(@RequestBody UserUpdateRequest request) {
-        return userService.updateUser(request, request.id());
+    @PutMapping("/settings/user")
+    public UserInfoResponse updateUser(@RequestBody UserUpdateRequest request,
+                                       @AuthenticationPrincipal User user) {
+        return userService.updateUser(request, user);
     }
 
-    @PutMapping(value = "/photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public UserInfoResponse updatePhoto(@ModelAttribute UserPhotoUpdateRequest request) {
-        return userService.updatePhoto(request.photo(), request.userId());
+    @PutMapping(value = "/settings/photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public UserInfoResponse updatePhoto(@ModelAttribute UserPhotoUpdateRequest request,
+                                        @AuthenticationPrincipal User user) {
+        return userService.updatePhoto(request.photo(), user);
     }
 
-    @PutMapping("/password")
-    public UserInfoResponse updatePassword(@RequestBody UserPasswordUpdateRequest request) {
-        return userService.updatePassword(request.password(), request.userId());
+    @PutMapping("/settings/password")
+    public UserInfoResponse updatePassword(@RequestBody UserPasswordUpdateRequest request,
+                                           @AuthenticationPrincipal User user) {
+        return userService.updatePassword(request.password(), user);
     }
+
+    // TODO: create the method to enable user or vice versa
+    // TODO: logging
+    // TODO: global type projections
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping
+    @GetMapping("/user")
     public Page<UserInfoResponse> getAllUsers(
             @RequestParam(defaultValue = "0") int pageNo,
             @RequestParam(defaultValue = "3") int pageSize,
