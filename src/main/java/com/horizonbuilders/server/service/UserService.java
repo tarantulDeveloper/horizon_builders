@@ -1,5 +1,6 @@
 package com.horizonbuilders.server.service;
 
+import com.horizonbuilders.server.dto.request.UserEnableOrDisableRequest;
 import com.horizonbuilders.server.dto.request.UserUpdateRequest;
 import com.horizonbuilders.server.dto.response.UserInfoResponse;
 import com.horizonbuilders.server.model.User;
@@ -20,4 +21,6 @@ public interface UserService {
     UserInfoResponse updatePassword(String password, User user);
 
     UserInfoResponse findUser(User user);
+
+    UserInfoResponse enableOrDisableTheUser(UserEnableOrDisableRequest request);
 }

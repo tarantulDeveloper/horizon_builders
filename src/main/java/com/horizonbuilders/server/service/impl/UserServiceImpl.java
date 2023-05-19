@@ -1,9 +1,9 @@
 package com.horizonbuilders.server.service.impl;
 
+import com.horizonbuilders.server.dto.request.UserEnableOrDisableRequest;
 import com.horizonbuilders.server.dto.request.UserUpdateRequest;
 import com.horizonbuilders.server.dto.response.UserInfoResponse;
 import com.horizonbuilders.server.exception.AlreadyExistException;
-import com.horizonbuilders.server.exception.ResourceNotFoundException;
 import com.horizonbuilders.server.exception.UserNotFoundException;
 import com.horizonbuilders.server.mapper.UserMapper;
 import com.horizonbuilders.server.model.User;
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
         User user = User.builder()
                 .username(username)
                 .password(passwordEncoder.encode(password))
-                .enabled(true)
+                .active(true)
                 .position(positionService.getPositionById(positionId))
                 .roles(Set.of(ERole.WORKER))
                 .build();
@@ -84,5 +84,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserInfoResponse findUser(User user) {
         return userMapper.toUserInfoResponse(user);
+    }
+
+    @Override
+    public UserInfoResponse enableOrDisableTheUser(UserEnableOrDisableRequest request) {
+        User user = userRepository.findById(request.id()).orElseThrow(UserNotFoundException::new);
+        user.setActive(request.enable());
+        return userMapper.toUserInfoResponse(userRepository.save(user));
     }
 }
