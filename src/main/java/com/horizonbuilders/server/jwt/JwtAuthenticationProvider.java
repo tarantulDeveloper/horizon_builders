@@ -1,6 +1,7 @@
 package com.horizonbuilders.server.jwt;
 
 import com.horizonbuilders.server.exception.BadRequestException;
+import com.horizonbuilders.server.exception.UnauthorizedException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -27,6 +28,11 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
         if (userDetails != null) {
+
+            if (!userDetails.isAccountNonLocked()) {
+                throw new UnauthorizedException("User is disabled");
+            }
+
             if (passwordEncoder.matches(password, userDetails.getPassword())) {
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                         userDetails, password, userDetails.getAuthorities()
