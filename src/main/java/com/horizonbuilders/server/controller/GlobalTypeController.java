@@ -24,7 +24,6 @@ public class GlobalTypeController {
         return globalTypeService.createGlobalType(request.name());
     }
 
-    @PreAuthorize("hasAnyAuthority({'ADMIN', 'WORKER'})")
     @GetMapping
     public Page<GlobalType> getAllGlobalTypes(
             @RequestParam(defaultValue = "0") int pageNo,
@@ -34,7 +33,6 @@ public class GlobalTypeController {
         return globalTypeService.getAllGlobalTypes(pageNo, pageSize, sortBy);
     }
 
-    @PreAuthorize("hasAnyAuthority({'ADMIN', 'WORKER'})")
     @GetMapping("/{globalTypeId}")
     public GlobalType getGlobalTypeById(@PathVariable("globalTypeId") int globalTypeId) {
         return globalTypeService.getById(globalTypeId);

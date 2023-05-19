@@ -26,7 +26,6 @@ public class ProductController {
         return productService.createProduct(request);
     }
 
-    @PreAuthorize("hasAnyAuthority({'ADMIN', 'WORKER'})")
     @GetMapping
     public Page<Product> getAllProducts(
             @RequestParam(defaultValue = "0") int pageNo,
@@ -36,7 +35,6 @@ public class ProductController {
         return productService.getAllProducts(pageNo, pageSize, sortBy);
     }
 
-    @PreAuthorize("hasAnyAuthority({'ADMIN', 'WORKER'})")
     @GetMapping("/{productId}")
     public Product getProductById(@PathVariable("productId") int productId) {
         return productService.getById(productId);

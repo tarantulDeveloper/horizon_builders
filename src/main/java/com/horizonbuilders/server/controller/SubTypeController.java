@@ -24,7 +24,6 @@ public class SubTypeController {
         return subTypeService.addSubType(request.name(), request.id());
     }
 
-    @PreAuthorize("hasAnyAuthority({'ADMIN', 'WORKER'})")
     @GetMapping
     public Page<SubType> getAllSubTypes(
             @RequestParam(defaultValue = "0") int pageNo,
@@ -34,7 +33,6 @@ public class SubTypeController {
         return subTypeService.getAllSubTypes(pageNo, pageSize, sortBy);
     }
 
-    @PreAuthorize("hasAnyAuthority({'ADMIN', 'WORKER'})")
     @GetMapping("{subTypeId}")
     public SubType getSubTypeById(@PathVariable("subTypeId") int subTypeId) {
         return subTypeService.getById(subTypeId);
