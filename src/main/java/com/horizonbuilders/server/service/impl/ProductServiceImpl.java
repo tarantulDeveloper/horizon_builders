@@ -30,9 +30,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product createProduct(ProductRequest request) {
-        if (productRepository.existsByName(request.name())) {
-            throw new AlreadyExistException("Product already exists!");
-        }
         if (request.price() < 0 || request.quantity() < 0) {
             throw new BadRequestException("Price or quantity should be more than 0!");
         }
