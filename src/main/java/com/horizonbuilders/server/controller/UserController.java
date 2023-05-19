@@ -1,9 +1,6 @@
 package com.horizonbuilders.server.controller;
 
-import com.horizonbuilders.server.dto.request.UserPasswordUpdateRequest;
-import com.horizonbuilders.server.dto.request.UserPhotoUpdateRequest;
-import com.horizonbuilders.server.dto.request.UserRequest;
-import com.horizonbuilders.server.dto.request.UserUpdateRequest;
+import com.horizonbuilders.server.dto.request.*;
 import com.horizonbuilders.server.dto.response.UserInfoResponse;
 import com.horizonbuilders.server.model.User;
 import com.horizonbuilders.server.service.UserService;
@@ -65,6 +62,12 @@ public class UserController {
             @RequestParam(defaultValue = "id") String sortBy
     ) {
         return userService.getAllUsers(pageNo, pageSize, sortBy);
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PutMapping("/user/enable")
+    public UserInfoResponse enableOrDisableTheUser(@RequestBody UserEnableOrDisableRequest request) {
+        return userService.enableOrDisableTheUser(request);
     }
 
 
