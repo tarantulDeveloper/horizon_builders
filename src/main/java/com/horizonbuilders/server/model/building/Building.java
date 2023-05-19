@@ -26,6 +26,6 @@ public class Building extends DefaultModel {
     @Enumerated(EnumType.STRING)
     EState state;
     @OneToMany()
-    @JoinColumn(name = "building_id",referencedColumnName = "id")
+    @JoinColumn(name = "building_id", referencedColumnName = "id")
     List<User> employeeList = new ArrayList<>();
 }
