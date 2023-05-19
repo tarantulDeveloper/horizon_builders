@@ -42,8 +42,8 @@ public class JwtFilter extends OncePerRequestFilter {
             return;
         }
 
-        if(request.getRequestURI().endsWith("/api/authenticate") || request.getRequestURI().endsWith("/api/refresh-token")){
-            filterChain.doFilter(request,response);
+        if (request.getRequestURI().endsWith("/api/authenticate") || request.getRequestURI().endsWith("/api/refresh-token")) {
+            filterChain.doFilter(request, response);
             return;
         }
 

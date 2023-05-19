@@ -41,6 +41,7 @@ public class AppSecurityConfiguration {
             "/api/authenticate/**",
             "/api/refresh-token/**"
 
+
     };
 
     @Bean
