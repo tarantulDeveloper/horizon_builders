@@ -21,7 +21,7 @@ public class SubTypeController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public SubType addSubType(@RequestBody SubTypeRequest request) {
-        return subTypeService.addSubType(request.name(), request.id());
+        return subTypeService.addSubType(request.name(), request.globalTypeId());
     }
 
     @GetMapping
