@@ -27,7 +27,7 @@ public class User extends DefaultModel implements UserDetails {
     String photoUrl;
     String phoneNumber;
     String address;
-    boolean enabled;
+    boolean active;
     @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "position_id")
     Position position;
@@ -48,7 +48,7 @@ public class User extends DefaultModel implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return enabled;
+        return active;
     }
 
     @Override
