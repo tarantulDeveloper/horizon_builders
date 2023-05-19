@@ -39,7 +39,8 @@ public class AppSecurityConfiguration {
 
             //endpoints\
             "/api/authenticate/**",
-            "/api/refresh-token/**"
+            "/api/refresh-token/**",
+            "/test/**"
 
 
     };

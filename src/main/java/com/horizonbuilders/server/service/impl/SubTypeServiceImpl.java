@@ -25,9 +25,6 @@ public class SubTypeServiceImpl implements SubTypeService {
 
     @Override
     public SubType addSubType(String name, int globalTypeId) {
-        if (subTypeRepository.existsByName(name)) {
-            throw new AlreadyExistException("Sub type already exists!");
-        }
         SubType subType = new SubType();
         subType.setName(name);
         subType.setGlobalType(globalTypeService.getById(globalTypeId));
