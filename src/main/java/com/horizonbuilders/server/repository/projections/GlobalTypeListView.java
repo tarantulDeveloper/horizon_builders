@@ -17,5 +17,6 @@ public interface GlobalTypeListView {
         // TODO: get global type by id remove
         // TODO: implement
         // TODO: add bidirectional association
+        // add descriptions to admin endpoints
     }
 }
