@@ -25,7 +25,10 @@ public class Building extends DefaultModel {
     String imgUrl;
     @Enumerated(EnumType.STRING)
     EState state;
-    @OneToMany()
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "building_id")
+    List<Apartment> apartmentList = new ArrayList<>();
+    @OneToMany
     @JoinColumn(name = "building_id", referencedColumnName = "id")
     List<User> employeeList = new ArrayList<>();
 }

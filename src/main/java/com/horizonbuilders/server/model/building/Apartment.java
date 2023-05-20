@@ -23,6 +23,6 @@ public class Apartment extends DefaultModel {
     @Enumerated(EnumType.STRING)
     EStatus status;
     String imgUrl;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     Building building;
 }
