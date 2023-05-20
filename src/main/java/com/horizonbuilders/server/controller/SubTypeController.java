@@ -24,15 +24,6 @@ public class SubTypeController {
         return subTypeService.addSubType(request.name(), request.globalTypeId());
     }
 
-    @GetMapping
-    public Page<SubType> getAllSubTypes(
-            @RequestParam(defaultValue = "0") int pageNo,
-            @RequestParam(defaultValue = "3") int pageSize,
-            @RequestParam(defaultValue = "id") String sortBy
-    ) {
-        return subTypeService.getAllSubTypes(pageNo, pageSize, sortBy);
-    }
-
     @GetMapping("{subTypeId}")
     public SubType getSubTypeById(@PathVariable("subTypeId") int subTypeId) {
         return subTypeService.getById(subTypeId);
