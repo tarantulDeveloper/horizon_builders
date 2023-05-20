@@ -5,6 +5,7 @@ import com.horizonbuilders.server.exception.BadRequestException;
 import com.horizonbuilders.server.exception.ResourceNotFoundException;
 import com.horizonbuilders.server.model.inventory.GlobalType;
 import com.horizonbuilders.server.repository.GlobalTypeRepository;
+import com.horizonbuilders.server.repository.projections.GlobalTypeListView;
 import com.horizonbuilders.server.service.GlobalTypeService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -33,11 +34,11 @@ public class GlobalTypeServiceImpl implements GlobalTypeService {
     }
 
     @Override
-    public Page<GlobalType> getAllGlobalTypes(
+    public Page<GlobalTypeListView> getAllGlobalTypes(
             int pageNo, int pageSize, String sortBy
     ) {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
-        return globalTypeRepository.findAll(pageable);
+        return globalTypeRepository.findAllProjectedBy(pageable);
     }
 
     @Override

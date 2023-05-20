@@ -32,12 +32,6 @@ public class SubTypeServiceImpl implements SubTypeService {
     }
 
     @Override
-    public Page<SubType> getAllSubTypes(int pageNo, int pageSize, String sortBy) {
-        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
-        return subTypeRepository.findAll(pageable);
-    }
-
-    @Override
     public SubType getById(int subTypeId) {
         return subTypeRepository.findById(subTypeId)
                 .orElseThrow(() -> new ResourceNotFoundException("Sub type not found!"));

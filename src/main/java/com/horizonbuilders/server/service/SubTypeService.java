@@ -7,8 +7,6 @@ import org.springframework.data.domain.Page;
 public interface SubTypeService {
     SubType addSubType(String name, int globalTypeId);
 
-    Page<SubType> getAllSubTypes(int pageNo, int pageSize, String sortBy);
-
     SubType getById(int subTypeId);
 
     void deleteById(int subTypeId);

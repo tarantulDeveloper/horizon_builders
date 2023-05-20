@@ -3,6 +3,7 @@ package com.horizonbuilders.server.controller;
 import com.horizonbuilders.server.dto.request.GlobalTypeRequest;
 import com.horizonbuilders.server.dto.request.GlobalTypeUpdateRequest;
 import com.horizonbuilders.server.model.inventory.GlobalType;
+import com.horizonbuilders.server.repository.projections.GlobalTypeListView;
 import com.horizonbuilders.server.service.GlobalTypeService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -25,17 +26,12 @@ public class GlobalTypeController {
     }
 
     @GetMapping
-    public Page<GlobalType> getAllGlobalTypes(
+    public Page<GlobalTypeListView> getAllGlobalTypes(
             @RequestParam(defaultValue = "0") int pageNo,
             @RequestParam(defaultValue = "3") int pageSize,
             @RequestParam(defaultValue = "id") String sortBy
     ) {
         return globalTypeService.getAllGlobalTypes(pageNo, pageSize, sortBy);
-    }
-
-    @GetMapping("/{globalTypeId}")
-    public GlobalType getGlobalTypeById(@PathVariable("globalTypeId") int globalTypeId) {
-        return globalTypeService.getById(globalTypeId);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
