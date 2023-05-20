@@ -34,11 +34,6 @@ public class GlobalTypeController {
         return globalTypeService.getAllGlobalTypes(pageNo, pageSize, sortBy);
     }
 
-    @GetMapping("/{globalTypeId}")
-    public GlobalType getGlobalTypeById(@PathVariable("globalTypeId") int globalTypeId) {
-        return globalTypeService.getById(globalTypeId);
-    }
-
     @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/{globalTypeId}")
     public void deleteById(@PathVariable("globalTypeId") int globalTypeId) {
