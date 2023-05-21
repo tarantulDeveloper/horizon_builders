@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -50,6 +51,8 @@ public class AppSecurityConfiguration {
         http.csrf().disable()
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(WHITELIST).permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/purchase-request").permitAll()
+                        .requestMatchers("/api/purchase-request").hasAnyAuthority("ADMIN","SUPERVISOR")
                         .anyRequest().authenticated())
                 .exceptionHandling().authenticationEntryPoint(authEntryPoint)
                 .and()
