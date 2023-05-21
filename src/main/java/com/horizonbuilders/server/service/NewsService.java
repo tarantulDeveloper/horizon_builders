@@ -9,4 +9,6 @@ public interface NewsService {
     News createNews(NewsRequest request);
 
     Page<NewsListView> getAllNews(int pageNo, int pageSize, String sortBy);
+
+    News getNewsById(int newsId);
 }

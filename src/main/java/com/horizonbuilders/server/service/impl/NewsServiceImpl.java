@@ -1,6 +1,7 @@
 package com.horizonbuilders.server.service.impl;
 
 import com.horizonbuilders.server.dto.request.NewsRequest;
+import com.horizonbuilders.server.exception.ResourceNotFoundException;
 import com.horizonbuilders.server.model.News;
 import com.horizonbuilders.server.repository.NewsRepository;
 import com.horizonbuilders.server.repository.projections.NewsListView;
@@ -36,5 +37,12 @@ public class NewsServiceImpl implements NewsService {
     public Page<NewsListView> getAllNews(int pageNo, int pageSize, String sortBy) {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
         return newsRepository.findAllProjectedBy(pageable);
+    }
+
+    @Override
+    public News getNewsById(int newsId) {
+        return newsRepository.findById(newsId).orElseThrow(
+                () -> new ResourceNotFoundException("News not found!")
+        );
     }
 }

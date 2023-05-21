@@ -30,4 +30,9 @@ public class NewsController {
     ) {
         return newsService.getAllNews(pageNo, pageSize, sortBy);
     }
+
+    @GetMapping("/{newsId}")
+    public News getNewsById(@PathVariable("newsId") int newsId) {
+        return newsService.getNewsById(newsId);
+    }
 }
