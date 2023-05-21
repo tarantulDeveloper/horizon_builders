@@ -18,7 +18,7 @@ public class NewsServiceImpl implements NewsService {
     final CloudinaryService cloudinaryService;
 
     @Override
-    public Nreturn null;ews createNews(NewsRequest request) {
+    public News createNews(NewsRequest request) {
         News news = News.builder()
                 .header(request.header())
                 .text(request.text())
