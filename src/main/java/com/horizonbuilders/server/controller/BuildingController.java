@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public class BuildingController {
     final BuildingService buildingService;
 
+    @SecurityRequirements
     @GetMapping
     @SecurityRequirements
     public Page<BuildingResponse> getAllBuildings(
@@ -38,10 +39,11 @@ public class BuildingController {
         return buildingService.addBuilding(request);
     }
 
+    @SecurityRequirements
     @GetMapping("/{buildingId}")
     @SecurityRequirements
     public BuildingResponse getBuildingById(@PathVariable("buildingId") int buildingId) {
-        return buildingService.getById(buildingId);
+        return buildingService.getBuildingResponseById(buildingId);
     }
 
     @Operation(description = """
