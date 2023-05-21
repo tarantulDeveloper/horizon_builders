@@ -10,4 +10,6 @@ public interface PurchaseRequestService {
     Page<PurchaseRequest> getAllPurchaseRequests(int pageNo, int pageSize, String sortBy);
 
     PurchaseRequest getPurchaseRequestById(int purchaseId);
+
+    void deletePurchaseRequestById(int purchaseId);
 }

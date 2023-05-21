@@ -42,4 +42,13 @@ public class PurchaseRequestServiceImpl implements PurchaseRequestService {
                 () -> new ResourceNotFoundException("Purchase request not found!")
         );
     }
+
+    @Override
+    public void deletePurchaseRequestById(int purchaseId) {
+        if(purchaseRequestRepository.existsById(purchaseId)) {
+            purchaseRequestRepository.deleteById(purchaseId);
+        } else {
+            throw new ResourceNotFoundException("Purchase request not found!");
+        }
+    }
 }

@@ -36,4 +36,9 @@ public class PurchaseRequestController {
     public PurchaseRequest getPurchaseRequestById(@PathVariable("purchaseId") int purchaseId) {
         return purchaseRequestService.getPurchaseRequestById(purchaseId);
     }
+
+    @DeleteMapping("/{purchaseId}")
+    public void deletePurchaseRequestById(@PathVariable("purchaseId") int purchaseId) {
+        purchaseRequestService.deletePurchaseRequestById(purchaseId);
+    }
 }
