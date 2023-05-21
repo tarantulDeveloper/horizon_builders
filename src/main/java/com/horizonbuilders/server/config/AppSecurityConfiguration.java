@@ -51,8 +51,10 @@ public class AppSecurityConfiguration {
         http.csrf().disable()
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(WHITELIST).permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/purchase-request").permitAll()
-                        .requestMatchers("/api/purchase-request").hasAnyAuthority("ADMIN","SUPERVISOR")
+                        .requestMatchers(HttpMethod.POST, "/api/purchase-request/**").permitAll()
+                        .requestMatchers("/api/purchase-request/**").hasAnyAuthority("ADMIN","SUPERVISOR")
+                        .requestMatchers(HttpMethod.GET, "/api/news/**").permitAll()
+                        .requestMatchers("/api/news/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated())
                 .exceptionHandling().authenticationEntryPoint(authEntryPoint)
                 .and()
