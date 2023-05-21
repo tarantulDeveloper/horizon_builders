@@ -7,6 +7,10 @@ import com.horizonbuilders.server.service.PurchaseRequestService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,5 +27,11 @@ public class PurchaseRequestServiceImpl implements PurchaseRequestService {
                         .message(request.message())
                         .build()
         );
+    }
+
+    @Override
+    public Page<PurchaseRequest> getAllPurchaseRequests(int pageNo, int pageSize, String sortBy) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
+        return purchaseRequestRepository.findAll(pageable);
     }
 }

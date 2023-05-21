@@ -6,10 +6,8 @@ import com.horizonbuilders.server.service.PurchaseRequestService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,5 +19,14 @@ public class PurchaseRequestController {
     @PostMapping
     public PurchaseRequest createPurchaseRequest(@RequestBody PurchaseCreateRequest request) {
         return purchaseRequestService.createPurchase(request);
+    }
+
+    @GetMapping
+    public Page<PurchaseRequest> getAllPurchaseRequests(
+            @RequestParam(defaultValue = "0") int pageNo,
+            @RequestParam(defaultValue = "10") int pageSize,
+            @RequestParam(defaultValue = "id") String sortBy
+    ) {
+        return purchaseRequestService.getAllPurchaseRequests(pageNo, pageSize, sortBy);
     }
 }
