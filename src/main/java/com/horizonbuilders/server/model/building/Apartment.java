@@ -1,5 +1,6 @@
 package com.horizonbuilders.server.model.building;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.horizonbuilders.server.model.DefaultModel;
 import com.horizonbuilders.server.model.enums.EStatus;
 import jakarta.persistence.*;
@@ -14,8 +15,6 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 public class Apartment extends DefaultModel {
-    int apartmentNumber;
-    int floorNumber;
     int roomNumber;
     double area;
     double pricePerArea;
@@ -23,6 +22,7 @@ public class Apartment extends DefaultModel {
     @Enumerated(EnumType.STRING)
     EStatus status;
     String imgUrl;
+    @JsonIgnore
     @ManyToOne
     Building building;
 }
