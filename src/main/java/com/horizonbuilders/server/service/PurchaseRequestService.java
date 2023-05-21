@@ -8,4 +8,6 @@ public interface PurchaseRequestService {
     PurchaseRequest createPurchase(PurchaseCreateRequest request);
 
     Page<PurchaseRequest> getAllPurchaseRequests(int pageNo, int pageSize, String sortBy);
+
+    PurchaseRequest getPurchaseRequestById(int purchaseId);
 }

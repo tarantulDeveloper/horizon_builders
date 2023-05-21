@@ -1,6 +1,7 @@
 package com.horizonbuilders.server.service.impl;
 
 import com.horizonbuilders.server.dto.request.PurchaseCreateRequest;
+import com.horizonbuilders.server.exception.ResourceNotFoundException;
 import com.horizonbuilders.server.model.PurchaseRequest;
 import com.horizonbuilders.server.repository.PurchaseRequestRepository;
 import com.horizonbuilders.server.service.PurchaseRequestService;
@@ -33,5 +34,12 @@ public class PurchaseRequestServiceImpl implements PurchaseRequestService {
     public Page<PurchaseRequest> getAllPurchaseRequests(int pageNo, int pageSize, String sortBy) {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
         return purchaseRequestRepository.findAll(pageable);
+    }
+
+    @Override
+    public PurchaseRequest getPurchaseRequestById(int purchaseId) {
+        return purchaseRequestRepository.findById(purchaseId).orElseThrow(
+                () -> new ResourceNotFoundException("Purchase request not found!")
+        );
     }
 }
