@@ -2,6 +2,7 @@ package com.horizonbuilders.server.dto.response;
 
 
 public record BuildingResponse(
+        int id,
         String dateStart,
         String dateEnd,
         String name,
