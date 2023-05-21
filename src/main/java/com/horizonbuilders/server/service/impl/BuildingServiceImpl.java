@@ -55,7 +55,7 @@ public class BuildingServiceImpl implements BuildingService {
     }
 
     @Override
-    public BuildingResponse getById(int buildingId) {
+    public BuildingResponse getBuildingResponseById(int buildingId) {
         return buildingRepository.findById(buildingId).map(buildingMapper::toBuildingResponse)
                 .orElseThrow(() -> new ResourceNotFoundException("Building not found!"));
 
@@ -85,6 +85,12 @@ public class BuildingServiceImpl implements BuildingService {
                 .orElseThrow(() -> new ResourceNotFoundException("Building not found!"));
         building.setImgUrl(cloudinaryService.upload(request.img()));
         return buildingMapper.toBuildingResponse(buildingRepository.save(building));
+    }
+
+    @Override
+    public Building getBuildingById(int buildingId) {
+        return buildingRepository.findById(buildingId)
+                .orElseThrow(() -> new ResourceNotFoundException("Building not found!"));
     }
 
 }

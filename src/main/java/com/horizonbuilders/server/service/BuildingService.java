@@ -4,6 +4,7 @@ import com.horizonbuilders.server.dto.request.BuildingImgUpdateRequest;
 import com.horizonbuilders.server.dto.request.BuildingRequest;
 import com.horizonbuilders.server.dto.request.BuildingUpdateRequest;
 import com.horizonbuilders.server.dto.response.BuildingResponse;
+import com.horizonbuilders.server.model.building.Building;
 import org.springframework.data.domain.Page;
 
 public interface BuildingService {
@@ -11,9 +12,11 @@ public interface BuildingService {
 
     BuildingResponse addBuilding(BuildingRequest request);
 
-    BuildingResponse getById(int buildingId);
+    BuildingResponse getBuildingResponseById(int buildingId);
 
     BuildingResponse updateBuilding(BuildingUpdateRequest request);
 
     BuildingResponse updateBuildingImg(BuildingImgUpdateRequest request);
+
+    Building getBuildingById(int buildingId);
 }
