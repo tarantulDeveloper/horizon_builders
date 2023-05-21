@@ -18,9 +18,12 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class Building extends DefaultModel {
+    String dateStart;
+    String dateEnd;
     String name;
+    String description;
     int numberOfFloors;
-    String city;
+    int numberOfApartments;
     String address;
     String imgUrl;
     @Enumerated(EnumType.STRING)
