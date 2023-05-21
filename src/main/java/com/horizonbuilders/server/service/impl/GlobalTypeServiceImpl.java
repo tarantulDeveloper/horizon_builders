@@ -58,9 +58,6 @@ public class GlobalTypeServiceImpl implements GlobalTypeService {
     public GlobalType updateGlobalType(GlobalTypeUpdateRequest request, int id) {
         GlobalType updateGlobalType = globalTypeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Global type not found!"));
-        if (globalTypeRepository.existsByName(request.name())) {
-            throw new BadRequestException("Global type already exists!");
-        }
         updateGlobalType.setName(request.name());
         return globalTypeRepository.save(updateGlobalType);
     }
