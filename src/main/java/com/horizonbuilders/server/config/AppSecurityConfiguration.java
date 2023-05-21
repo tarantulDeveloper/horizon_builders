@@ -55,6 +55,7 @@ public class AppSecurityConfiguration {
                         .requestMatchers("/api/purchase-request/**").hasAnyAuthority("ADMIN", "SUPERVISOR")
                         .requestMatchers(HttpMethod.GET, "/api/news/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/building/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/apartment/**").permitAll()
                         .requestMatchers("/api/news/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated())
                 .exceptionHandling().authenticationEntryPoint(authEntryPoint)
