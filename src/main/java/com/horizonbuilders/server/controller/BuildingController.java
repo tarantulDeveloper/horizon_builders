@@ -6,6 +6,7 @@ import com.horizonbuilders.server.dto.request.BuildingUpdateRequest;
 import com.horizonbuilders.server.dto.response.BuildingResponse;
 import com.horizonbuilders.server.service.BuildingService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -22,6 +23,7 @@ public class BuildingController {
     final BuildingService buildingService;
 
     @GetMapping
+    @SecurityRequirements
     public Page<BuildingResponse> getAllBuildings(
             @RequestParam(defaultValue = "0") int pageNo,
             @RequestParam(defaultValue = "3") int pageSize,
@@ -37,6 +39,7 @@ public class BuildingController {
     }
 
     @GetMapping("/{buildingId}")
+    @SecurityRequirements
     public BuildingResponse getBuildingById(@PathVariable("buildingId") int buildingId) {
         return buildingService.getById(buildingId);
     }
