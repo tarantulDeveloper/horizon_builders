@@ -10,10 +10,6 @@ import com.horizonbuilders.server.service.SubTypeService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -48,9 +44,6 @@ public class SubTypeServiceImpl implements SubTypeService {
     public SubType updateSubType(SubTypeUpdateRequest request, int id) {
         SubType updateSubType = subTypeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Sub type not found!"));
-        if (subTypeRepository.existsByName(request.name())) {
-            throw new AlreadyExistException("Sub type already exists!");
-        }
         updateSubType.setName(request.name());
         updateSubType.setGlobalType(globalTypeService.getById(request.globalTypeId()));
         return subTypeRepository.save(updateSubType);

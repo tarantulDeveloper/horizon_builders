@@ -28,7 +28,4 @@ public class Building extends DefaultModel {
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "building_id")
     List<Apartment> apartmentList = new ArrayList<>();
-    @OneToMany
-    @JoinColumn(name = "building_id", referencedColumnName = "id")
-    List<User> employeeList = new ArrayList<>();
 }

@@ -67,9 +67,6 @@ public class ProductServiceImpl implements ProductService {
     public Product updateProduct(ProductUpdateRequest request, int id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found!"));
-        if (productRepository.existsByName(request.name())) {
-            throw new AlreadyExistException("Product already exists!");
-        }
         if (request.price() < 0 || request.quantity() < 0) {
             throw new BadRequestException("Price or quantity should be more than 0!");
         }
