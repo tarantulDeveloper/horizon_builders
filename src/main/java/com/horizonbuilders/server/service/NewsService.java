@@ -11,4 +11,6 @@ public interface NewsService {
     Page<NewsListView> getAllNews(int pageNo, int pageSize, String sortBy);
 
     News getNewsById(int newsId);
+
+    void deleteNewsById(int newsId);
 }

@@ -35,4 +35,9 @@ public class NewsController {
     public News getNewsById(@PathVariable("newsId") int newsId) {
         return newsService.getNewsById(newsId);
     }
+
+    @DeleteMapping("/{newsId}")
+    public void deleteNewsById(@PathVariable("newsId") int newsId) {
+        newsService.deleteNewsById(newsId);
+    }
 }

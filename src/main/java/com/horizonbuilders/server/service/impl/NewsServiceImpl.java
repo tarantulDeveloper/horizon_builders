@@ -45,4 +45,13 @@ public class NewsServiceImpl implements NewsService {
                 () -> new ResourceNotFoundException("News not found!")
         );
     }
+
+    @Override
+    public void deleteNewsById(int newsId) {
+        if(newsRepository.existsById(newsId)) {
+            newsRepository.deleteById(newsId);
+        } else {
+            throw new ResourceNotFoundException("News not found!");
+        }
+    }
 }
