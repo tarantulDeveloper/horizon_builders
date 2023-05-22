@@ -16,6 +16,7 @@ public interface ApartmentListView {
     BuildingProjection getBuilding();
 
     interface BuildingProjection {
+        int getId();
         String getName();
         String getAddress();
     }
