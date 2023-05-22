@@ -24,7 +24,6 @@ public class BuildingController {
 
     @SecurityRequirements
     @GetMapping
-    @SecurityRequirements
     public Page<BuildingResponse> getAllBuildings(
             @RequestParam(defaultValue = "0") int pageNo,
             @RequestParam(defaultValue = "3") int pageSize,
@@ -41,7 +40,6 @@ public class BuildingController {
 
     @SecurityRequirements
     @GetMapping("/{buildingId}")
-    @SecurityRequirements
     public BuildingResponse getBuildingById(@PathVariable("buildingId") int buildingId) {
         return buildingService.getBuildingResponseById(buildingId);
     }
