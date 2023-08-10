@@ -9,11 +9,11 @@
 ***
 
 ## Документация
-[Swagger](http://3.34.2.208:5000/api-docs/swagger-ui/index.html)
+~~[Swagger](http://3.34.2.208:5000/api-docs/swagger-ui/index.html)~~
 ***
 
 ## Сайт
-[horizon-builders](http://3.34.2.208/)
+~~[horizon-builders](http://3.34.2.208/)~~
 ***
 
 
